@@ -1,14 +1,14 @@
 var express = require("express");
 var app = express();
 var bodyParser = require("body-parser");
-var path = require("path")
+var path = require("path");
 
-var puppies = require (../data/puppies.js)
+var puppies = require ("../data/puppies.js");
 
 module.exports = function(app){
 //get rout with URL /api/friends to display JSON of friends
 app.get("/api/puppies", function(req, res) {
-    return res.json(puppies);
+    res.json(puppies);
   });
 
 
