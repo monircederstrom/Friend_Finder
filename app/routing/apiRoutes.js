@@ -16,15 +16,15 @@ app.get("/api/puppies", function(req, res) {
 app.post("/api/puppies", function(req, res) {
     // req.body hosts is equal to the JSON post sent from the user
     // This works because of our body-parser middleware
-    var newpuppies = req.body;
+    var newpuppy = req.body;
   
-    console.log(newpuppies);
+    console.log(newpuppy);
   
     // We then add the json the user sent to the character array
-    puppies.push(newpuppies);
+    puppies.push(newpuppy);
   
     // We then display the JSON to the users
-    res.json(newpuppies);
+    res.json(newpuppy);
   });
   
 };
