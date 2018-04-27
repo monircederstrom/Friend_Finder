@@ -187,16 +187,17 @@
         //check to see if form is filled in completely]
         var checking = true;
         $(".form-control").each(function() {
-            if ($(this).val() ==== "") {
+            if ($(this).val() === "") {
                 checking === false;
+                alert("Please fill in all the information");
             }
         }
         );
         return checking;
-    }
+    
 
     //if everything is filled in then push to puppy array
-    if (checking()) {
+    if (checking == true ) {
         //new object is created
     
         var newPuppy = { 
@@ -216,10 +217,16 @@
 
             ]
         };
+        
         //post to friends API
         app.post("/api/puppies", function(req, res) {
-            
-        })
-    })
+           var newPuppy = req.body;
+           newPuppy.routeName = newcharacter.name.replace(/\s+/g, "").toLowerCase();
+            console.log(newPuppy);
+            puppies.push(newPuppy);
+            res.json(newcharacter);
+        });
     
+}
+})
 </script>
