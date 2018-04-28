@@ -17,7 +17,7 @@ app.post("/api/puppies", function(req, res) {
     var pup = {
         name: "",
         photo: "",
-        friendDifference: 1000
+
       };
     var newPuppy = req.body;
     for (var i = 0; i < puppies.length; i++) {
@@ -27,7 +27,8 @@ app.post("/api/puppies", function(req, res) {
             diff += Math.abs(puppies[i].scores[j] - newPuppy.scores[j]);
         }
             // Reset the bestMatch to be the new friend.
-        var pawfect = diffArry.indexOf(Math.min(...diffArr));
+        var pawfect = diffArr.indexOf(Math.min(...diffArr));
+            //for (var m = 0; m < diffArr)
             //pawfect.name = puppies[i].name;
         //pawfect.photo = puppies[i].photo;
         //pawfect.friendDifference = totalDifference;
