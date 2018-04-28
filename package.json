@@ -1,10 +1,10 @@
 {
-  "name": "friend_finder",
+  "name": "pupcudler_finder",
   "version": "1.0.0",
   "description": "Users will answer a set of questions and be matched to their most compatable friend.",
   "main": "index.js",
   "scripts": {
-    "start": "node index.js",
+    "start": "node server.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {

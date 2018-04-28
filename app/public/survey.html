@@ -23,9 +23,12 @@
 
   <div class="modal"> 
         <h2>Your pawfect pup cuddler is: </h2> <br>
-        <div id="pupname"></div>
+        <div id="pupname">
+            Rowdy
+        </div>
         <br>
         <div id="puppic"></div>
+        <img src="https://www.instagram.com/p/eLksh8THUomeMwfN6QmJjS-xD_zV_ubskh-8Q0/?taken-by=mrscederstrom" ALT="github" width="50" height="50">
       <br>
   
         <button type="button" class="btn btn-secondary" id="closemodal" data-dismiss="modal">Close</button>
@@ -188,20 +191,7 @@
         event.preventDefault();
         $(".survey").hide();
         $(".modal").show();
-        //check to see if form is filled in completely]
-        var checking = true;
-        $(".form-control").each(function() {
-            if ($(this).val() === "") {
-                checking === false;
-                alert("Please fill in all the information");
-            }
-        
-        return checking;
-    
-    //if everything is filled in then push to puppy array
-    if (checking == true ) {
-        //new object is created
-    
+       
         var newPuppy = { 
             name: $("#name").val().trim(),
             photo: $("#photolink").val().trim(),
@@ -221,15 +211,15 @@
         };
   
         //post to friends API
-        $.post("/api/puppies", newPuppy, function(data) {
-           $("#pupname").text(data.name);
-           $("#puppic").attr("src", data.photo);
+        $.post("/api/puppies", newPuppy, function(pup) {
+           $("#pupname").text(pup.name);
+           $("#puppic").attr("src", pup.photo);
            //newPuppy.routeName = newcharacter.name.replace(/\s+/g, "").toLowerCase();
           
         });
-    }
 });
-})
+
+
 </script>
 </body>
 </html>
