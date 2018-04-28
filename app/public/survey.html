@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
 
     <!-- Added link to the jQuery Library -->
@@ -15,38 +15,37 @@
     <link href="https://fonts.googleapis.com/css?family=Gaegu:700" rel="stylesheet">
     <link rel="stylesheet" type="text/css" href=" style.css"> 
     <title>Survey Questions</title>
+    <script src="http://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+
+
 </head>
 <body>
-<form>
-   <h1>Survey Questions</h1>
-   <hr>
-   <h3>About You</h3>
 
-    <div class="form-group">
-      <label for="formGroupExampleInput">Name (Required)</label>
-      <input type="text" class="form-control" id="name" placeholder="Rowdy Ronda Rousey">
-    </div>
-    <div class="form-group">
-      <label for="formGroupExampleInput2">Link to Photo Image (required)</label>
-      <input type="text" class="form-control" id="photolink" placeholder="www.bluesteelpics.com">
-    </div>
-  </form>
   <div class="modal"> 
-     
-        <h5 class="modal-title">Modal title</h5>
-   
-          <span aria-hidden="true">&times;</span>
-   
-    
-
-        <p>Modal body text goes here.</p>
-      
+        <h2>Your pawfect pup cuddler is: </h2> <br>
+        <div id="pupname"></div>
+        <br>
+        <div id="puppic"></div>
+      <br>
   
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary">Save changes</button>
-   
+        <button type="button" class="btn btn-secondary" id="closemodal" data-dismiss="modal">Close</button>
+        
 </div>
 <div class="survey">
+        <form>
+                <h1>Survey Questions</h1>
+                <hr>
+                <h3>About You</h3>
+             
+                 <div class="form-group">
+                   <label for="formGroupExampleInput">Name (Required)</label>
+                   <input type="text" class="form-control" id="name" placeholder="Rowdy Ronda Rousey">
+                 </div>
+                 <div class="form-group">
+                   <label for="formGroupExampleInput2">Link to Photo Image (required)</label>
+                   <input type="text" class="form-control" id="photolink" placeholder="www.bluesteelpics.com">
+                 </div>
+               </form>
         <hr>
    
         <h3>Question 1</h3>   
@@ -163,13 +162,12 @@
 
     <button class="done"><i class="far fa-check-circle"></i> DONE</button>
  
-
 <hr>
 <p>
 <nav class="nav">
-        <a class="nav-link active" href="#">API Pup Friends List</a>
+        <a class="nav-link active" href="/api/puppies">API Pup Friends List</a>
    
-        <a class="nav-link active" href="#">GitHub Repo</a>
+        <a class="nav-link active" href="https://github.com/monircederstrom/PupCuddler_Finder">GitHub Repo</a>
 </nav>
 </p>
 </div>
@@ -178,12 +176,18 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js" integrity="sha384-cs/chFZiN24E4KMATLdqdvsezGxaGsi4hLGOzlXwp5UZB1LY//20VyM2taTB4QvJ" crossorigin="anonymous"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js" integrity="sha384-uefMccjFJAIv6A+rW+L4AHf99KvxDjWSu1z9VI8SKNVmz4sk7buKt/6v9KI65qnm" crossorigin="anonymous"></script>
 
-</body>
-</html>
+
+
 <script type="text/javascript">
+        $(".modal").hide();
+    $("#closemodal").on("click", function (event) {
+        $(".modal").hide();
+        $(".survey").show();
+    });
     $(".done").on("click", function(event) {
         event.preventDefault();
-
+        $(".survey").hide();
+        $(".modal").show();
         //check to see if form is filled in completely]
         var checking = true;
         $(".form-control").each(function() {
@@ -191,11 +195,9 @@
                 checking === false;
                 alert("Please fill in all the information");
             }
-        }
-        );
+        
         return checking;
     
-
     //if everything is filled in then push to puppy array
     if (checking == true ) {
         //new object is created
@@ -217,16 +219,17 @@
 
             ]
         };
-        
+  
         //post to friends API
-        app.post("/api/puppies", function(req, res) {
-           var newPuppy = req.body;
-           newPuppy.routeName = newcharacter.name.replace(/\s+/g, "").toLowerCase();
-            console.log(newPuppy);
-            puppies.push(newPuppy);
-            res.json(newcharacter);
+        $.post("/api/puppies", newPuppy, function(data) {
+           $("#pupname").text(data.name);
+           $("#puppic").attr("src", data.photo);
+           //newPuppy.routeName = newcharacter.name.replace(/\s+/g, "").toLowerCase();
+          
         });
-    
-}
+    }
+});
 })
 </script>
+</body>
+</html>
